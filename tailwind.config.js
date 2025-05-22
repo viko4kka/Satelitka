@@ -4,7 +4,14 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        mainColorText: "#18003D",
+        mainBackgroundColor: "#4000B0",
+        mainDarkBackgroundColor: "#210351",
+        
+      },
+    },
   },
   plugins: [],
 };

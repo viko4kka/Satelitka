@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
     "strict": true,
+    "noImplicitAny": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
@@ -14,5 +13,6 @@
     "expo-env.d.ts",
     "nativewind-env.d.ts"
   ],
+
   "extends": "expo/tsconfig.base"
 }
