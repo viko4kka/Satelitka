@@ -1,15 +1,46 @@
-import { StyleSheet, Text, View } from "react-native";
+import { icons } from "@/constants/icons";
+import { LinearGradient } from "expo-linear-gradient";
+import { Pressable, StyleSheet } from "react-native";
 
 interface TabBarButtonProps {
   label: string;
   isFocused: boolean;
+  onPress: () => void;
+  onLongPress: () => void;
+  routeName: keyof typeof icons;
+  color: string;
 }
 
-function TabBarButton({ label, isFocused }: TabBarButtonProps) {
+function TabBarButton({
+  label,
+  isFocused,
+  onPress,
+  onLongPress,
+  routeName,
+  color,
+}: TabBarButtonProps) {
   return (
-    <View style={[styles.tabBarButton, isFocused && styles.focused]}>
-      <Text style={styles.label}>{label}</Text>
-    </View>
+    <Pressable
+      onPress={onPress}
+      onLongPress={onLongPress}
+      style={[
+        styles.tabBarButton,
+        isFocused ? styles.isActiveTabButton : styles.inactiveTabButton,
+      ]}
+    >
+      {isFocused && (
+        <LinearGradient
+          colors={["#122D94", "#3048A2"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={StyleSheet.absoluteFillObject}
+        />
+      )}
+
+      {icons[routeName]({
+        color: isFocused ? "#fff" : "#ddd",
+      })}
+    </Pressable>
   );
 }
 
@@ -17,16 +48,20 @@ export default TabBarButton;
 
 const styles = StyleSheet.create({
   tabBarButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    backgroundColor: "#0000ff",
-    borderRadius: 10,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 12,
+    padding: 12,
+    marginHorizontal: 20,
+    overflow: "hidden",
   },
-  focused: {
-    backgroundColor: "#000088",
+  isActiveTabButton: {
+    backgroundColor: "#122D94",
+    borderWidth: 1,
+    borderColor: "#3048A2",
   },
-  label: {
-    color: "#ffffff",
-    fontSize: 14,
+  inactiveTabButton: {
+    backgroundColor: "transparent",
   },
 });
